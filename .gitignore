@@ -1,0 +1,170 @@
+# AI Engineer Learning Program .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pyvenv.cfg
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Data files (add exceptions as needed)
+*.csv
+*.json
+*.parquet
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.sqlite
+*.db
+
+# Model files (large binary files)
+*.model
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.pb
+*.tflite
+*.onnx
+*.joblib
+
+# Dataset directories (uncomment if you have large datasets)
+# data/raw/
+# data/processed/
+# datasets/
+
+# Machine Learning artifacts
+mlruns/
+.mlflow/
+wandb/
+tensorboard_logs/
+*.log
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Docker
+.dockerignore
+Dockerfile.bak
+
+# Cloud credentials
+*.pem
+*.key
+gcp-key.json
+aws-credentials.json
+azure-credentials.json
+
+# API keys and secrets
+secrets/
+*.secret
+api_keys.txt
+config/secrets.yaml
+
+# Large media files
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Documentation builds
+docs/_build/
+docs/site/
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Profiling
+.prof
+
+# Experiment tracking
+experiments/
+checkpoints/
+saved_models/
+
+# Personal notes (if you want to keep them private)
+# personal-notes/
+# private-thoughts.md
+
+# Large files marker
+*.large
+
+# Add your own patterns below
+# ========================
