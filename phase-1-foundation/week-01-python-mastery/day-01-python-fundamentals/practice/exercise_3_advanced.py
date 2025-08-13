@@ -12,49 +12,117 @@ class Library:
     def __init__(self):
         # TODO: Initialize an empty dictionary to store books
         # Key: book_id (string), Value: book info (dictionary)
-        pass
+        self.books = {}
     
+    def list_books(self):
+        # TODO: List all the books in the library
+        # List all books in the library sorted
+        for id, book in self.books.items():
+            print(f'ID: {id} | Title: {book['title']},  Author: {book['author']},  Available {book['available']}')
+        
     def add_book(self, book_id, title, author, year):
         # TODO: Add a book to the library
         # Create a dictionary with title, author, year, available (True by default)
-        pass
+        self.books[book_id] = {
+            'title': title,
+            'author': author,
+            'year': year,
+            'available': True
+        }
     
     def remove_book(self, book_id):
         # TODO: Remove a book from the library
-        # Handle case where book doesn't exist (use try-except or if-else)
-        pass
+        try:
+            del self.books[book_id]
+        except KeyError as e:
+            return 'Book for book id: {e} not found!'
+        except Exception as e:
+            return f'Error: {e}'
     
     def borrow_book(self, book_id):
         # TODO: Mark a book as not available (available = False)
         # Return success/failure message
         # Handle cases: book doesn't exist, book already borrowed
-        pass
+        
+        # Get the book
+        book = self.books.get(book_id)
+
+        # Check if book isn't found
+        if not book:
+            return f'Error accessing book with an ID of {book_id}.'
+        
+        # Check if book is available
+        if book['available'] == False:
+            return f'Book: {book['title']} has already been checked out'
+        
+        # Check out the book
+        book['available'] = False
+
+        return f'Successfully checked out: {book['title']}'
     
     def return_book(self, book_id):
         # TODO: Mark a book as available (available = True)
         # Handle cases: book doesn't exist, book wasn't borrowed
-        pass
+        
+        book = self.books.get(book_id)
+        
+        # Handle book doesn't exist
+        if not book:
+            return f'Book {book_id} does not exist!'
+        
+        # Handle book wasn't borrowed
+        if book['available'] == True:
+            return f'Book: {book['title']} was not checked out.'
+
+        # Handle returning the book
+        book['available'] = True
+        
+        return f'Successfully returned": {book['title']}'
     
     def search_books(self, search_term):
         # TODO: Return a list of book_ids where the search_term appears in title or author
         # Use list comprehension and make search case-insensitive
-        pass
+
+        matching_books = [
+            key for key, value in self.books.items()
+            if value['title'].lower() == search_term.lower() or 
+            value['author'].lower() == search_term.lower()
+            ]
+
+        return matching_books
     
     def get_available_books(self):
         # TODO: Return a dictionary of only available books
         # Use dictionary comprehension
-        pass
+        
+        available_books = {key: value for key, value in self.books.items() if value['available'] == True}
+
+        return available_books
     
     def save_to_file(self, filename):
         # TODO: Save the library data to a JSON file
         # Use try-except for error handling
-        pass
+        try:
+            with open(filename, 'w', encoding='utf-8') as file:
+                json.dump(self.books, file)
+            return f'Sucessfully wrote the list of books to file: {filename}'    
+        except FileNotFoundError as f:
+            return f'Unable to Save the file {f}'
+        except Exception as e:
+            return f'Error: {e}'
     
     def load_from_file(self, filename):
         # TODO: Load library data from a JSON file
         # Use try-except for error handling
         # Handle case where file doesn't exist
-        pass
+        try:
+            with open(filename, 'r', encoding='utf-8') as file:
+                self.books = json.load(file)
+            return f'Successfully loaded list of books from: {filename}'
+        except FileNotFoundError:
+            return f'Unable to locate file: {filename}'
+        except Exception as e:
+            return f'Error: {e}'
 
 # ===== DATA PROCESSING CHALLENGE =====
 # TODO: Create a function that processes student grades data
@@ -147,9 +215,25 @@ if __name__ == "__main__":
     lib = Library()
     
     # Add some books
+    lib.add_book(book_id=1 , title='Python for Dummies', author='Stef Maruch', year=2007)
+    lib.add_book(book_id=2, title='Machine Learning for Dummies', author='Claude', year=2025)
+    lib.add_book(book_id=3, title='Harry Potter 1', author='J. K. Rowling', year=1997)
+
+    # Test Listing the books
+    lib.list_books()
+
     # Test borrowing and returning
+    print(lib.borrow_book(1))
+    print(lib.return_book(1))
+
     # Test search functionality
+    print(lib.search_books('PYTHON FOR DUMMIES'))
+    print(lib.search_books('j. k. rowling'))
+
     # Test file operations
+    print(lib.save_to_file('./fav_books.json'))
+    print(lib.load_from_file('./fav_books.json'))
+
     
     print("\n=== Testing Grade Analysis ===")
     sample_students = [
