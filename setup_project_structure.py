@@ -1,27 +1,35 @@
 #!/usr/bin/env python3
 """
-AI Engineer Learning Program - Project Structure Setup Script
+AI Engineer Learning Program - Cleanup and Recreate Script
 
-This script creates the complete directory structure for the 6-month
-AI Engineer learning program, including all phases, weeks, days, and
-project folders.
+This script removes all existing phase-* directories and recreates them
+with the correct structure (3 exercises per day).
 
-Run this script in your desired project directory:
-    python setup_project_structure.py
+Run this script in your project directory:
+    python cleanup_and_recreate_phases.py
 """
 
 import os
+import shutil
 from pathlib import Path
 
-def create_directory_structure():
-    """Create the complete project directory structure."""
+def cleanup_and_recreate_phases():
+    """Remove all phase-* directories and recreate them cleanly."""
     
-    # Base project structure
-    base_dirs = [
-        "docs",
-        "utils", 
-        "projects"
-    ]
+    print("🧹 Starting cleanup and recreation of phase directories...")
+    
+    # First, remove all existing phase-* directories
+    current_dir = Path(".")
+    phase_dirs = [d for d in current_dir.iterdir() if d.is_dir() and d.name.startswith("phase-")]
+    
+    if phase_dirs:
+        print(f"🗑️  Removing {len(phase_dirs)} existing phase directories:")
+        for phase_dir in phase_dirs:
+            print(f"   Removing: {phase_dir.name}")
+            shutil.rmtree(phase_dir)
+        print("✅ Cleanup complete!")
+    else:
+        print("📂 No existing phase directories found to remove.")
     
     # Phase 1: Foundation Building (Weeks 1-4)
     phase1_structure = {
@@ -199,32 +207,6 @@ def create_directory_structure():
         }
     }
     
-    # Project structure 
-    project_structure = [
-        "project-01-data-dashboard",
-        "project-02-math-visualizations", 
-        "project-03-eda-pipeline",
-        "project-04-deploy-simple-model",
-        "project-05-classification-system",
-        "project-06-regression-predictor",
-        "project-07-customer-segmentation", 
-        "project-08-recommendation-engine",
-        "project-09-model-comparison-framework",
-        "project-10-end-to-end-pipeline",
-        "project-11-neural-net-scratch", 
-        "project-12-deep-learning-classifier",
-        "project-13-image-classifier",
-        "project-14-object-detection",
-        "project-15-sentiment-analyzer",
-        "project-16-chatbot-prototype",
-        "project-17-bert-fine-tuning",
-        "project-18-llm-application", 
-        "project-19-image-generation",
-        "project-20-production-ml-system",
-        "project-21-specialized-domain",
-        "project-22-final-capstone"
-    ]
-    
     def create_day_structure(day_path):
         """Create standard structure for each day folder."""
         day_folders = ["theory", "practice", "projects"]
@@ -236,29 +218,13 @@ def create_directory_structure():
         (day_path / "theory" / "notes.md").touch()
         (day_path / "reflections.md").touch()
         
-        # Create sample practice files
-        (day_path / "practice" / "exercise_1.py").touch()
-        (day_path / "practice" / "exercise_2.py").touch()
+        # Create 3 practice files: 1 for previous knowledge, 2 for current day
+        (day_path / "practice" / "exercise_1_prior_knowledge.py").touch()
+        (day_path / "practice" / "exercise_2_core_concepts.py").touch()
+        (day_path / "practice" / "exercise_3_advanced.py").touch()
         (day_path / "projects" / "mini_project.py").touch()
     
-    def create_project_structure(project_path):
-        """Create standard structure for each project folder."""
-        project_folders = ["src", "data", "notebooks", "models", "docs"]
-        for folder in project_folders:
-            os.makedirs(project_path / folder, exist_ok=True)
-            
-        # Create template files
-        (project_path / "README.md").touch()
-        (project_path / "requirements.txt").touch()
-        (project_path / "src" / "__init__.py").touch()
-        (project_path / "src" / "main.py").touch()
-        
-    print("🚀 Creating AI Engineer Learning Program directory structure...")
-    
-    # Create base directories
-    for dir_name in base_dirs:
-        os.makedirs(dir_name, exist_ok=True)
-        print(f"✅ Created base directory: {dir_name}")
+    print("\n🚀 Recreating phase directories with correct structure...")
     
     # Combine all phase structures
     all_phases = {**phase1_structure, **phase2_structure, **phase3_structure, **phase4_structure}
@@ -284,40 +250,16 @@ def create_directory_structure():
                 create_day_structure(day_path)
                 print(f"    📝 Created day: {day_name}")
     
-    # Create project directories
-    projects_path = Path("projects")
-    for project_name in project_structure:
-        project_path = projects_path / project_name
-        os.makedirs(project_path, exist_ok=True)
-        create_project_structure(project_path)
-        print(f"🎯 Created project: {project_name}")
-    
-    # Create documentation files
-    doc_files = ["learning-log.md", "resources.md", "interview-prep.md"]
-    docs_path = Path("docs")
-    for doc_file in doc_files:
-        (docs_path / doc_file).touch()
-    print(f"📚 Created documentation files in docs/")
-    
-    # Create utility files
-    utils_files = ["data_processing.py", "visualization_helpers.py", "model_evaluation.py", "__init__.py"]
-    utils_path = Path("utils")
-    for util_file in utils_files:
-        (utils_path / util_file).touch()
-    print(f"🛠️ Created utility files in utils/")
-    
-    # Create requirements.txt and other root files
-    Path("requirements.txt").touch()
-    Path("LICENSE").touch()
-    Path(".gitignore").touch()
-    
-    print("\n🎉 Directory structure created successfully!")
-    print("\n📋 Next steps:")
-    print("1. Initialize git repository: git init")
-    print("2. Add remote repository: git remote add origin <your-repo-url>") 
-    print("3. Create initial commit: git add . && git commit -m 'Initial project structure'")
-    print("4. Start with Phase 1, Week 1, Day 1!")
-    print("\n🚀 Ready to begin your AI Engineer journey!")
+    print("\n🎉 Phase directories recreated successfully!")
+    print("📁 Each day now has the correct structure:")
+    print("   📂 theory/")
+    print("   📂 practice/")
+    print("      📄 exercise_1_prior_knowledge.py")
+    print("      📄 exercise_2_core_concepts.py") 
+    print("      📄 exercise_3_advanced.py")
+    print("   📂 projects/")
+    print("      📄 mini_project.py")
+    print("\n🚀 Ready to continue with your AI Engineer journey!")
 
 if __name__ == "__main__":
-    create_directory_structure()
+    cleanup_and_recreate_phases()
