@@ -1,121 +1,170 @@
-# Exercise 2: Core Python Fundamentals (15-20 minutes)
-# Today we're diving deeper into Python's core concepts!
+# Exercise 3: Advanced Applications (15-20 minutes)
+# Time to combine concepts and tackle more challenging scenarios!
 
-# ===== LIST COMPREHENSIONS =====
-# Think of list comprehensions like a recipe card - they're a compact way to create lists
-# Format: [expression for item in iterable if condition]
+import json
+from datetime import datetime
 
-# TODO: Create a list of squares for numbers 1-10 using list comprehension
-squares = # Your code here
+# ===== ADVANCED CLASS DESIGN =====
+# Let's create a more sophisticated class that uses multiple concepts
 
-# TODO: Create a list of even numbers from 1-20 using list comprehension
-evens = # Your code here
+# TODO: Create a 'Library' class that manages books
+class Library:
+    def __init__(self):
+        # TODO: Initialize an empty dictionary to store books
+        # Key: book_id (string), Value: book info (dictionary)
+        pass
+    
+    def add_book(self, book_id, title, author, year):
+        # TODO: Add a book to the library
+        # Create a dictionary with title, author, year, available (True by default)
+        pass
+    
+    def remove_book(self, book_id):
+        # TODO: Remove a book from the library
+        # Handle case where book doesn't exist (use try-except or if-else)
+        pass
+    
+    def borrow_book(self, book_id):
+        # TODO: Mark a book as not available (available = False)
+        # Return success/failure message
+        # Handle cases: book doesn't exist, book already borrowed
+        pass
+    
+    def return_book(self, book_id):
+        # TODO: Mark a book as available (available = True)
+        # Handle cases: book doesn't exist, book wasn't borrowed
+        pass
+    
+    def search_books(self, search_term):
+        # TODO: Return a list of book_ids where the search_term appears in title or author
+        # Use list comprehension and make search case-insensitive
+        pass
+    
+    def get_available_books(self):
+        # TODO: Return a dictionary of only available books
+        # Use dictionary comprehension
+        pass
+    
+    def save_to_file(self, filename):
+        # TODO: Save the library data to a JSON file
+        # Use try-except for error handling
+        pass
+    
+    def load_from_file(self, filename):
+        # TODO: Load library data from a JSON file
+        # Use try-except for error handling
+        # Handle case where file doesn't exist
+        pass
 
-# TODO: Create a list of words that start with 'P' from the given list
-words = ["Python", "Java", "Programming", "Code", "Pasta", "Pizza"]
-p_words = # Your code here
+# ===== DATA PROCESSING CHALLENGE =====
+# TODO: Create a function that processes student grades data
 
-print(f"Squares: {squares}")
-print(f"Evens: {evens}")
-print(f"P-words: {p_words}")
+def analyze_student_grades(students_data):
+    """
+    Process student grades and return comprehensive statistics.
+    
+    Input format: 
+    [
+        {"name": "Alice", "grades": [85, 92, 78, 96]},
+        {"name": "Bob", "grades": [76, 81, 88, 79]},
+        ...
+    ]
+    
+    Return a dictionary with:
+    - student_averages: {name: average_grade}
+    - class_average: overall average
+    - top_student: name of student with highest average
+    - grade_distribution: {"A": count, "B": count, ...} where A=90+, B=80-89, etc.
+    """
+    # TODO: Implement this function using multiple Python concepts:
+    # - Dictionary/list comprehensions
+    # - Lambda functions with map/filter
+    # - Exception handling
+    # - Built-in functions (max, min, etc.)
+    
+    result = {
+        "student_averages": {},
+        "class_average": 0,
+        "top_student": "",
+        "grade_distribution": {"A": 0, "B": 0, "C": 0, "D": 0, "F": 0}
+    }
+    
+    # Your implementation here
+    
+    return result
 
-# ===== DICTIONARY COMPREHENSIONS =====
-# Like list comprehensions, but for dictionaries!
-# Format: {key_expr: value_expr for item in iterable}
+# ===== DECORATOR PRACTICE =====
+# Decorators are like gift wrapping - they add functionality to existing functions
 
-# TODO: Create a dictionary where keys are numbers 1-5 and values are their cubes
-cubes_dict = # Your code here
+# TODO: Create a timing decorator that measures how long a function takes to execute
+def timing_decorator(func):
+    """A decorator that prints how long a function takes to execute."""
+    # Import time module at the top if needed
+    import time
+    
+    def wrapper(*args, **kwargs):
+        # TODO: Record start time, call function, record end time, print duration
+        pass
+    
+    return wrapper
 
-# TODO: Create a dictionary from two lists (keys and values)
-keys = ["apple", "banana", "cherry"]
-values = [5, 8, 3]
-fruit_count = # Your code here
+# TODO: Create a logging decorator that prints when a function is called
+def logging_decorator(func):
+    """A decorator that logs when a function is called."""
+    def wrapper(*args, **kwargs):
+        # TODO: Print function name and arguments, then call the function
+        pass
+    
+    return wrapper
 
-print(f"Cubes: {cubes_dict}")
-print(f"Fruit count: {fruit_count}")
+# TODO: Apply both decorators to this function
+def slow_calculation(n):
+    """A function that does some 'slow' calculation."""
+    import time
+    time.sleep(0.1)  # Simulate slow operation
+    return sum(range(n))
 
-# ===== EXCEPTION HANDLING =====
-# Think of try-except like wearing a helmet while biking - it protects you from crashes!
+# ===== CONTEXT MANAGER =====
+# TODO: Create a simple context manager class for temporary file operations
+class TempFileManager:
+    def __init__(self, filename):
+        self.filename = filename
+        self.file = None
+    
+    def __enter__(self):
+        # TODO: Open the file and return the file object
+        pass
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # TODO: Close the file if it's open
+        # Handle any cleanup needed
+        pass
 
-# TODO: Write a function that safely divides two numbers
-# If division by zero occurs, return "Cannot divide by zero"
-# If other errors occur, return "An error occurred"
-def safe_divide(a, b):
-    # Your code here with try-except
-    pass
-
-# TODO: Write a function that safely converts a string to an integer
-# If conversion fails, return None
-def safe_int_convert(string_num):
-    # Your code here with try-except
-    pass
-
-# Test your exception handling
-print(safe_divide(10, 2))    # Should print 5.0
-print(safe_divide(10, 0))    # Should handle division by zero
-print(safe_int_convert("123"))  # Should print 123
-print(safe_int_convert("abc"))  # Should handle conversion error
-
-# ===== FILE HANDLING =====
-# Think of file handling like borrowing a library book - open it, read/write, then close it!
-
-# TODO: Create a function that writes a list of favorite foods to a file
-def write_foods_to_file(foods, filename):
-    # Use 'with' statement to safely handle the file
-    # Write each food on a new line
-    pass
-
-# TODO: Create a function that reads the foods back from the file
-def read_foods_from_file(filename):
-    # Use 'with' statement and handle potential file not found error
-    # Return a list of foods (strip newline characters)
-    pass
-
-# Test your file handling
-favorite_foods = ["Pizza", "Tacos", "Ice Cream", "Sushi"]
-# TODO: Call your write function
-
-# TODO: Call your read function and print the result
-
-
-# ===== LAMBDA FUNCTIONS & MAP/FILTER =====
-# Lambda functions are like quick sketches - small, anonymous functions for simple tasks
-
-# TODO: Use map() with a lambda to convert a list of temperatures from Celsius to Fahrenheit
-# Formula: F = C * 9/5 + 32
-celsius_temps = [0, 20, 30, 40]
-fahrenheit_temps = # Your code here using map and lambda
-
-# TODO: Use filter() with a lambda to get only positive numbers
-numbers = [-5, -2, 0, 3, 8, -1, 10]
-positive_numbers = # Your code here using filter and lambda
-
-print(f"Celsius: {celsius_temps}")
-print(f"Fahrenheit: {list(fahrenheit_temps)}")
-print(f"All numbers: {numbers}")
-print(f"Positive only: {list(positive_numbers)}")
-
-# ===== GENERATORS =====
-# Generators are like a conveyor belt - they produce items one at a time, not all at once
-
-# TODO: Create a generator function that yields even numbers up to a limit
-def even_numbers_generator(limit):
-    # Use yield instead of return
-    # This should generate even numbers from 2 up to (but not including) limit
-    pass
-
-# TODO: Create a generator expression for squares of numbers 1-5
-squares_gen = # Your code here (generator expression)
-
-# Test your generators
-print("Even numbers up to 10:")
-for num in even_numbers_generator(10):
-    print(num, end=" ")
-print()
-
-print("Squares generator:")
-for square in squares_gen:
-    print(square, end=" ")
-print()
-
-print("\n🎯 Core concepts practice complete!")
+# ===== TESTING SECTION =====
+if __name__ == "__main__":
+    print("=== Testing Library Class ===")
+    # TODO: Create a library instance and test all methods
+    lib = Library()
+    
+    # Add some books
+    # Test borrowing and returning
+    # Test search functionality
+    # Test file operations
+    
+    print("\n=== Testing Grade Analysis ===")
+    sample_students = [
+        {"name": "Alice", "grades": [85, 92, 78, 96]},
+        {"name": "Bob", "grades": [76, 81, 88, 79]},
+        {"name": "Charlie", "grades": [95, 89, 93, 97]},
+        {"name": "Diana", "grades": [67, 72, 70, 68]}
+    ]
+    
+    # TODO: Call analyze_student_grades and print results
+    
+    print("\n=== Testing Decorators ===")
+    # TODO: Call slow_calculation with decorators applied
+    
+    print("\n=== Testing Context Manager ===")
+    # TODO: Use TempFileManager with 'with' statement
+    
+    print("\n🚀 Advanced applications complete!")
