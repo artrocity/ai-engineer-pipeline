@@ -16,7 +16,18 @@ This repository tracks my comprehensive 6-month AI Engineer learning journey, fe
 - **Daily coding exercises** and implementations
 - **Production-ready portfolio** pieces
 
-**Time Commitment:** 15-20 hours/week | **End Goal:** Job-ready AI Engineer with portfolio
+**Time Commitment:**
+
+15-20 hours/week | Each day may require more than one 'day' to complete.
+Use as many days as necessary to ensure you have the full fundamentals grasped
+before moving to the next day.
+
+For example, Day 1 is all about the fundamentals of Python. This could take you 1-2 weeks
+to finish Day 1. Just keep everything tracked and create more and more exercises as needed for your skill level.
+
+**End Goal:**
+
+Job-ready AI Engineer with portfolio
 
 ---
 
