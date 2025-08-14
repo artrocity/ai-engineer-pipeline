@@ -3,6 +3,7 @@
 
 import json
 from datetime import datetime
+import time
 
 # ===== ADVANCED CLASS DESIGN =====
 # Let's create a more sophisticated class that uses multiple concepts
@@ -149,6 +150,7 @@ def analyze_student_grades(students_data):
     # - Lambda functions with map/filter
     # - Exception handling
     # - Built-in functions (max, min, etc.)
+
     
     result = {
         "student_averages": {},
@@ -157,8 +159,32 @@ def analyze_student_grades(students_data):
         "grade_distribution": {"A": 0, "B": 0, "C": 0, "D": 0, "F": 0}
     }
     
-    # Your implementation here
+    # Student Averages
+    result['student_averages'] = {
+        student['name']: sum(student['grades']) / len(student['grades'])
+        for student in students_data
+    }
+
+    # Class Average
+    all_grades = [grade for student in students_data for grade in student['grades']]
+    result['class_average'] = sum(all_grades) / len(all_grades)
+
+    # Student with the highest average
+    result['top_student'] = max(result['student_averages'], key=result['student_averages'].get())
     
+    # Grade Distribution
+    # Helper function to categorize a grade
+    def get_letter_grade(grade):
+        if grade >= 90: return "A"
+        elif grade >= 80: return "B"
+        elif grade >= 70: return "C"
+        elif grade >= 60: return "D"
+        else: return "F"
+
+    # Count each letter grade
+    for grade in all_grades: 
+        letter = get_letter_grade(grade)
+        result['grade_distribution'][letter] += 1
     return result
 
 # ===== DECORATOR PRACTICE =====
@@ -167,12 +193,27 @@ def analyze_student_grades(students_data):
 # TODO: Create a timing decorator that measures how long a function takes to execute
 def timing_decorator(func):
     """A decorator that prints how long a function takes to execute."""
-    # Import time module at the top if needed
-    import time
     
     def wrapper(*args, **kwargs):
         # TODO: Record start time, call function, record end time, print duration
-        pass
+        
+        # Record start time
+        start_time = time.time()
+
+        # Call the original function and store it's results
+        result = func(*args, **kwargs)
+
+        # Record end time
+        end_time = time.time()
+
+        # Calculate duration
+        duration = end_time - start_time
+
+        # Output the time the functiont took
+        print(f"Function '{func.__name__}' took {duration:.4f} seconds to execute")
+
+        # Return the original function's results
+        return result
     
     return wrapper
 
