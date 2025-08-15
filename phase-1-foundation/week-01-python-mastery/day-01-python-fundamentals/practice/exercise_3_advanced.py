@@ -6,18 +6,31 @@ import datetime
 # TODO: Create a list of book titles with more than 10 characters
 book_titles = ["Python 101", "Data Science Handbook", "AI Basics", "Deep Learning Guide", "Clean Code"]
 # TODO: Your list comprehension here
+large_titles = [title for title in book_titles if len(title) > 10]
+print('===== LIST COMPREHENSION =====')
+print(large_titles)
 
 # TODO: Create a list of book years that are even numbers
 book_years = [1999, 2001, 2010, 2015, 2022]
 # TODO: Your list comprehension here
+even_years = [year for year in book_years if year % 2 == 0]
+print(even_years)
 
 # ===== DICTIONARY COMPREHENSIONS =====
-# TODO: Map book titles to their authors
+# TODO: Create a dictionary using the two lists below
 authors = ["Alice", "Bob", "Charlie", "David", "Eva"]
+titles = ['Alice in Wonderland', 'Bob the Builder', 'Charlies Angels', 'David & Goliath', 'Eva in Wonderland']
 # TODO: Your dictionary comprehension here
+print('===== DICT COMPREHENSION =====')
+book_dict = {author: title for author, title in zip(authors, titles)}
+print(book_dict)
 
-# TODO: Create a dictionary mapping years to number of books published in that year
+# TODO: Create a dictionary associating the number of books published in that year
+books_published = [2090, 3400, 2488]
+years = [2000, 2001, 2002]
 # TODO: Your dictionary comprehension here
+books_published_dict = {year: published for year, published in zip(years, books_published)}
+print(books_published_dict)
 
 # ===== EXCEPTION HANDLING =====
 # TODO: Write a function that converts a string input to a floating-point rating
