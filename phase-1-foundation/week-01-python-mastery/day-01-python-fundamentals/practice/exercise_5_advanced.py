@@ -91,11 +91,25 @@ print(read_book_filter('fav_books.json'))
 
 # ===== GENERATORS =====
 # TODO: Create a generator function that yields book titles starting with a vowel
-def vowel_books_generator(titles: List[str]):
-    pass  # Your implementation here
+def vowel_books_generator(titles):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    for title in titles:
+        if title[0].lower() in vowels:
+            yield title
 
 # TODO: Create a generator expression for lengths of each book title
 # TODO: Your generator expression here
+title_length = (len(title) for title in book_titles)
+
+print('===== GENERATORS =====')
+print('Titles with vowels: ')
+titles = vowel_books_generator(book_titles)
+for title in titles:
+    print(title)
+
+print('Title Lengths')
+for title in title_length:
+    print(title)
 
 # ===== CLASS & METHODS =====
 class BookManager:
